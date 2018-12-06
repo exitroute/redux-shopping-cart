@@ -24,6 +24,7 @@ export const ON_CHANGE = "ON_CHANGE";
 // onChange()
 
  export const onChange = (field, value) => {
+  console.log(field);
   return { type: ON_CHANGE, field, value }; 
 };
 

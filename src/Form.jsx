@@ -8,6 +8,7 @@ class Form extends React.Component {
   }
 
   render() {
+    console.log("From this.props ", this.props);
     return (
       <div className="col-md-8 order-md-1">
         <h4 className="mb-3">Billing address</h4>
@@ -20,7 +21,7 @@ class Form extends React.Component {
                 onChange={(e) => this.props.onChange(e.target.id, e.target.value)} 
                 className="form-control"
                 id="firstName"
-                value={this.props.data.firstName}
+                value={this.props.form.firstName}
                 placeholder=""
                 required="" />
               <div className="invalid-feedback">
@@ -31,7 +32,7 @@ class Form extends React.Component {
               <label htmlFor="lastName">Last name</label>
               <input
                 type="text"
-                value={this.props.data.lastName}
+                value={this.props.form.lastName}
                 onChange={(e) => this.props.onChange(e.target.id, e.target.value)} className="form-control"
                 id="lastName"
                 placeholder=""
@@ -53,7 +54,7 @@ class Form extends React.Component {
                 type="text"
                 className="form-control"
                 onChange={(e) => this.props.onChange(e.target.id, e.target.value)}
-                value={this.props.data.userName}
+                value={this.props.form.userName}
                 id="userName"
                 placeholder="Username"
                 required=""
@@ -70,7 +71,7 @@ class Form extends React.Component {
               type="email"
               className="form-control"
               onChange={(e) => this.props.onChange(e.target.id, e.target.value)}
-              value={this.props.data.email}
+              value={this.props.form.email}
               id="email"
               placeholder="you@example.com"
             />
@@ -84,7 +85,7 @@ class Form extends React.Component {
             <input
               type="text"
               className="form-control"
-              value={this.props.data.address}
+              value={this.props.form.address}
               onChange={(e) => this.props.onChange(e.target.id, e.target.value)}
               id="address"
               placeholder="1234 Main St"
@@ -100,7 +101,7 @@ class Form extends React.Component {
             <input
               type="text"
               className="form-control"
-              value={this.props.data.address2}
+              value={this.props.form.address2}
               onChange={(e) => this.props.onChange(e.target.id, e.target.value)}
               id="address2"
               placeholder="Apartment or suite" />
@@ -111,7 +112,7 @@ class Form extends React.Component {
               <label htmlFor="country">Country</label>
               <select
                 className="custom-select d-block w-100"
-                value={this.props.data.country}
+                value={this.props.form.country}
                 onChange={(e) => this.props.onChange(e.target.id, e.target.value)} id="country" required="">
                 <option value="">Choose...</option>
                 <option>United States</option>
@@ -124,7 +125,7 @@ class Form extends React.Component {
               <label htmlFor="state">State</label>
               <select
                 className="custom-select d-block w-100"
-                value={this.props.data.state}
+                value={this.props.form.state}
                 onChange={(e) => this.props.onChange(e.target.id, e.target.value)}
                 id="state"
                 required=""
@@ -141,7 +142,7 @@ class Form extends React.Component {
               <input
                 type="text" 
                 className="form-control" 
-                value={this.props.data.zip} 
+                value={this.props.form.zip} 
                 onChange={(e) => this.props.onChange(e.target.id, e.target.value)} 
                 id="zip" 
                 placeholder="" 
@@ -172,7 +173,7 @@ class Form extends React.Component {
 
           <div className="d-block my-3">
             <div className="custom-control custom-radio">
-              <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" checked="" required="" />
+              <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" required="" />
               <label className="custom-control-label" htmlFor="credit">Credit card</label>
             </div>
             <div className="custom-control custom-radio">
@@ -229,4 +230,4 @@ class Form extends React.Component {
 /// 1. FUNCTION to define which properties of the STATE are passed as PROPS to the REDUCER
 /// 2. OBJECT to pass ACTIONS as PROPS to the REDUCER 
 
-export default connect(state => ({}), {onChange})(Form);
+export default connect(state => ({ form: {} }), {onChange})(Form);
