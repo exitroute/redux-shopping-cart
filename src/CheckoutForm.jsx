@@ -46,24 +46,28 @@ class CheckoutForm extends React.Component {
     }
     this.updateItem = this.updateItem.bind(this);
     console.log("this.state: ", this.state);
+    console.log("this.state.form: ", this.state.form);
     console.log("this.updateItem: ", this.updateItem);
 
   }
 
-
+/*
   onChange = (field, value) => {
+    console.log("onChange(field, value): ", field, value);
+    console.log("onChange() let data: ", data);
+    console.log("this.state.data: ", this.state.data);
+    
     // local copy of state
-    console.log(field, value);
     let data = { ...this.state.form };
-    // console.log("onChange() let data: ", data);
-    // console.log("this.state.data: ", this.state.data);
+    
     // create form object with id of input
     data[field] = value
+    
     // sync to state and to LC
     this.setState({ form: data })
     localStorage.setItem('react-cart', JSON.stringify(this.state));
   }
-
+*/
   updateItem = (item, index) => {
     var data = this.state.data
     console.log("updateItem() var data: ", this.state.data);
@@ -112,8 +116,8 @@ class CheckoutForm extends React.Component {
             
           </div>
 
-          { /* Form needs data on load and the change handler */ }
-          <Form data={this.state.form} onChange={this.onChange} />
+          { /* Form needs data on load !!!! and the change handler */ }
+          <Form data={this.state.form} /*onChange={this.onChange}*/ />
 
         </div>
     );

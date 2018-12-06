@@ -2,19 +2,9 @@
 * Action Types
 */
 
-// onChange() 
 // update customer form
-// An action for each 
 
-/// "UPDATE" (field, value)
-
-/// "UPDATE_ADDRESS"
-/// "UPDATE_ADDRESS2"
-/// "UPDATE_COUNTRY"
-/// "UPDATE_EMAIL"
-/// "UPDATE_FIRST_NAME"
-/// "UPDATE_LAST_NAME" 
-
+export const ON_CHANGE = "ON_CHANGE";
 
 // upDataItem()
 // update item in cart
@@ -24,7 +14,16 @@
 /// "AMOUNT_ADD"
 /// "AMOUNT_SUBTRACT"
 
-/// "NAME"
-/// "RELEASE"
-/// "PRICE"
+/*
+* Action Creators
+*/ 
+
+// updateItem()
+
+
+// onChange()
+
+ export const onChange = (field, value) => {
+  return { type: ON_CHANGE, field, value }; 
+};
 

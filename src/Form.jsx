@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { onChange } from "./actions/index";
 
 class Form extends React.Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class Form extends React.Component {
               <label htmlFor="firstName">First name</label>
               <input
                 type="text"
-                onChange={(e) => this.props.onChange(e.target.id, e.target.value)} className="form-control"
+                onChange={(e) => this.props.onChange(e.target.id, e.target.value)} 
+                className="form-control"
                 id="firstName"
                 value={this.props.data.firstName}
                 placeholder=""
@@ -221,4 +224,9 @@ class Form extends React.Component {
     );
   }
 }
-export default Form;
+
+// Connect gets two ARGUMENTS: 
+/// 1. FUNCTION to define which properties of the STATE are passed as PROPS to the REDUCER
+/// 2. OBJECT to pass ACTIONS as PROPS to the REDUCER 
+
+export default connect(state => ({}), {onChange})(Form);
