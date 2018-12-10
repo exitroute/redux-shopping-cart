@@ -6,11 +6,11 @@
 
 export const ON_CHANGE = "ON_CHANGE";
 
-// upDataItem()
 // update item in cart
 
 /// these are actions that happen in the Product component
-/// "LIKED"
+export const LIKE = "LIKE";
+export const UPDATEITEM = "UPDATEITEM";
 /// "AMOUNT_ADD"
 /// "AMOUNT_SUBTRACT"
 
@@ -21,7 +21,6 @@ export const ON_CHANGE = "ON_CHANGE";
 // updateItem()
 
 
-// onChange()
 
  export const onChange = (field, value) => {
   console.log(field);

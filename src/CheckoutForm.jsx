@@ -5,9 +5,7 @@ import Product from './Product.jsx';
 import Form from './Form.jsx';
 
 class CheckoutForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
 /*
   onChange = (field, value) => {
@@ -56,7 +54,7 @@ class CheckoutForm extends React.Component {
             </h4>
             <ul className="list-group mb-3">
 
-              {/* this.props.data.map((person, i) => <Product updateItem={this.updateItem} key = {i} data = {person} />) */}
+              {this.props.data.map((person, i) => <Product updateItem={this.updateItem} key = {i} data = {person} />)}
 
               <li className="list-group-item d-flex justify-content-between lh-condensed">
                 Total: <span className="font-weight-bold">{/* this.props.total.toFixed(2)*/ } $ </span>
@@ -83,4 +81,4 @@ class CheckoutForm extends React.Component {
   }
 }
 
-export default connect(state => ({ data: {} }), undefined )(CheckoutForm);
+export default connect(state => ({ data: state.data }), updateItems )(CheckoutForm);

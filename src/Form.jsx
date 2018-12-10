@@ -8,7 +8,7 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log("From this.props ", this.props);
+    console.log("<Form> this.props ", this.props);
     return (
       <div className="col-md-8 order-md-1">
         <h4 className="mb-3">Billing address</h4>

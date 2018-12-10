@@ -14,11 +14,21 @@ class Product extends React.Component {
           </div>
           <div className="d-flex flex-column">
             <button 
-              className={ "btn btn-sm " + ( this.props.data.liked ? "btn-danger" : "btn-outline-danger"  ) } 
-              onClick = {(e) => this.props.updateItem(this, "like")}>like</button> 
+              className={ 
+                "btn btn-sm " + ( 
+                  this.props.data.liked ? "btn-danger" : "btn-outline-danger"  
+              ) } 
+              onClick = {(e) => this.props.updateItem(this, "like")}
+            >like</button>
             <span className="text-muted d-flex justify-content-center align-items-baseline">
-              <button className="btn btn-sm btn-light" onClick = {(e) => this.props.updateItem(this, false)}>-</button>
-              <button className="btn btn-sm btn-light" onClick = {(e) => this.props.updateItem(this, true)}>+</button>
+              <button 
+                className="btn btn-sm btn-light" 
+                onClick = {(e) => this.props.updateItem(this, false)}
+              >-</button>
+              <button 
+                className="btn btn-sm btn-light" 
+                onClick = {(e) => this.props.updateItem(this, true)}
+              >+</button>
             </span>
             <span className={ "badge "+ ( this.props.data.amount > 0 ? "badge-primary" : ""  )}>{ this.props.data.amount }</span>
             <span className="text-right">{ this.props.data.price }$</span>
