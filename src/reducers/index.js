@@ -1,7 +1,9 @@
-import { combineReducers } from "redux";
-import * as actions from "../actions/index";
-
-const initialState = JSON.parse(localStorage.getItem('react-cart')) || {
+const initialState = JSON.parse(localStorage.getItem("react-cart")) || {
+  headerdata: {
+    title: "React shopping cart",
+    desc:
+      "Below you find a react shopping cart which persists its data to the LocalStorage. Refactor it using Redux!"
+  },
   data:
     [
       {
@@ -38,73 +40,43 @@ const initialState = JSON.parse(localStorage.getItem('react-cart')) || {
   form: {}
 };
 
+export default (state = initialState, { type, input, index, item }) => {
+  switch (type) {
+    case "GETVALUES":
+      const value = input.type === "checkbox" ? input.checked : input.value;
+      console.log("GETVALUES", input.id, value);
+      const form = { ...state.form, [input.id]: value };
+      localStorage.setItem("react-cart", JSON.stringify({ ...state, form }));
+      return { ...state, form };
 
-console.log("this.initialState: ", initialState);
-console.log("this.initialState.form: ", initialState.form);
+    case "UPDATE":
+      console.log("UPDATE", index);
+      const data = [...state.data];
 
-function form(state = initialState, action) {
-  console.log("reducer/ from(action)  ", action);
-  switch (action.type) {
-    case actions.ON_CHANGE:
-      console.log("reducer/ from(action) in switch: ", action);
-      return {
-        ...state,
-        [action.field]: action.value
-      };
+      if (index === "like") {
+        data[item.id].liked = !data[item.id].liked;
+      } else if (index) {
+        data[item.id].amount++;
+      } else if (data[item.id].amount > 0) {
+        data[item.id].amount--;
+      }
+      data[item.id] = item;
+
+      const total = state.data
+        .map(item => item.price * item.amount)
+        .reduce((a, b) => a + b, 0);
+      localStorage.setItem(
+        "react-cart",
+        JSON.stringify({ ...state, total, data })
+      );
+      return { ...state, total, data };
+
+    case "DELETE":
+      console.log("Good Bye localStorage");
+      localStorage.removeItem("react-cart");
+      return;
+
     default:
       return state;
   }
-}
-
-
-function updateItems (state = initialState, action) {
-  console.log(`Action called in the reducer`, action);
-  console.log("###", action);
-  switch (action.type) {
-    case "UPDATEITEM":
-      return {
-        ...state,
-        data: [
-          ...state.data,
-          {
-            //TODO find the item instead of create a new one
-            [action.id]: action.item.props.data.amount + 1
-          }
-        ]
-      };
-      localStorage.setItem('react-cart', JSON.stringify(this.state));
-
-    case "LIKE":
-      //console.log("###", action);
-      //if ( index === "like" ) {
-      //data[item.props.data.id].liked = !data[item.props.data.id].liked 
-      //}
-      //else if (index)
-      //data[item.props.data.id].amount++
-      //else if (data[item.props.data.id].amount > 0)
-      //data[item.props.data.id].amount--
-
-      //this.props.total = data.map((item, index, array)=> item.price * item.amount).reduce((a, b) => a + b, 0);
-      //this.setState(this.state)
-      //localStorage.setItem('react-cart', JSON.stringify(this.state));
-      return {
-        ...state,
-        data: [
-          ...state.data,
-          {
-            [action.id]: action.value
-          }
-        ]
-      };
-      // localStorage.setItem('react-cart', JSON.stringify(this.state));
-    default:
-      return state;
-  }
-}
-
-const appReducer = combineReducers({
-  form,
-  updateItems
-});
-
-export default appReducer;
+};
